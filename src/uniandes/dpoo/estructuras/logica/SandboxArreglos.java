@@ -42,7 +42,11 @@ public class SandboxArreglos
      */
     public int[] getCopiaEnteros( )
     {
-        return null;
+    	int len = arregloEnteros.length;
+    	int[] copia = new int[len];
+    	System.arraycopy(arregloEnteros, 0, copia, 0, len);
+    	    	
+        return copia;
     }
 
     /**
@@ -51,7 +55,11 @@ public class SandboxArreglos
      */
     public String[] getCopiaCadenas( )
     {
-        return null;
+    	int len = arregloCadenas.length;
+    	String[] copia = new String[len];
+    	System.arraycopy(arregloCadenas, 0, copia, 0, len); //TODO: Sera que mejor hacemos materias 
+    	    	
+        return copia;
     }
 
     /**
@@ -60,7 +68,7 @@ public class SandboxArreglos
      */
     public int getCantidadEnteros( )
     {
-        return -1;
+        return arregloEnteros.length;
     }
 
     /**
@@ -69,7 +77,7 @@ public class SandboxArreglos
      */
     public int getCantidadCadenas( )
     {
-        return -1;
+        return arregloCadenas.length;
     }
 
     /**
@@ -79,7 +87,11 @@ public class SandboxArreglos
      */
     public void agregarEntero( int entero )
     {
-
+    	int[] nuevoArreglo = new int[getCantidadEnteros() + 1];
+    	
+    	
+    	
+    
     }
 
     /**
