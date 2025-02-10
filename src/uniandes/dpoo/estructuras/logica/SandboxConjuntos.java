@@ -1,6 +1,9 @@
 package uniandes.dpoo.estructuras.logica;
 
+import java.util.ArrayList; //Sera?
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NavigableSet;
 import java.util.TreeSet;
@@ -39,7 +42,26 @@ public class SandboxConjuntos
      */
     public List<String> getCadenasComoLista( )
     {
-        return null;
+    	
+    	List<String> lista = new ArrayList<String>( );
+    	for (String i: arbolCadenas) {
+    		lista.add(i);
+    	}
+    	
+    	List<String> listaOrd = new ArrayList<String>( );
+    	while (!lista.isEmpty()) {
+    		int mayPos = 0;
+    		String mayor = lista.get(0);
+    		for (int pos = 1; pos < lista.size(); pos++) {
+    			if (lista.get(pos).compareTo(mayor) < 0) {
+    				mayPos = pos;
+    				mayor = lista.get(pos);
+    			}
+    		}
+    		listaOrd.add(mayor);
+    		lista.remove(mayPos);
+    	}    	
+        return listaOrd;
     }
 
     /**
@@ -48,7 +70,13 @@ public class SandboxConjuntos
      */
     public List<String> getCadenasComoListaInvertida( )
     {
-        return null;
+    	List<String> lista;
+    	lista = getCadenasComoLista();
+    	List<String> inv = new ArrayList<String>( );
+    	for (String ele: lista) {
+    		inv.add(0, ele);
+    	}
+        return inv;
     }
 
     /**
@@ -59,7 +87,12 @@ public class SandboxConjuntos
      */
     public String getPrimera( )
     {
-        return null;
+    	if (arbolCadenas.size() == 0 || arbolCadenas.isEmpty()) {
+    		return null;
+    	} else {
+    		return arbolCadenas.first();
+    	}
+        
     }
 
     /**
@@ -70,7 +103,11 @@ public class SandboxConjuntos
      */
     public String getUltima( )
     {
-        return null;
+    	if (arbolCadenas.size() == 0 || arbolCadenas.isEmpty()) {
+    		return null;
+    	} else {
+    		return arbolCadenas.last();
+    	}
     }
 
     /**
@@ -80,7 +117,13 @@ public class SandboxConjuntos
      */
     public Collection<String> getSiguientes( String cadena )
     {
-        return null;
+    	List<String> lista = new ArrayList<>();
+    	for (String i: arbolCadenas) {
+    		if (i.compareTo(cadena) >= 0) {
+    			lista.add(i);
+    		}
+         } 
+        return lista;
     }
 
     /**
@@ -89,7 +132,7 @@ public class SandboxConjuntos
      */
     public int getCantidadCadenas( )
     {
-        return -1;
+        return arbolCadenas.size();
     }
 
     /**
@@ -101,7 +144,8 @@ public class SandboxConjuntos
      */
     public void agregarCadena( String cadena )
     {
-
+    	
+    	arbolCadenas.add(cadena);
     }
 
     /**
@@ -110,7 +154,7 @@ public class SandboxConjuntos
      */
     public void eliminarCadena( String cadena )
     {
-
+    	arbolCadenas.remove(cadena);
     }
 
     /**
@@ -119,7 +163,11 @@ public class SandboxConjuntos
      */
     public void eliminarCadenaSinMayusculasOMinusculas( String cadena )
     {
-
+    	if (arbolCadenas.contains(cadena.toLowerCase())){
+    		arbolCadenas.remove(cadena.toLowerCase());
+    	} else if (arbolCadenas.contains(cadena.toUpperCase())){
+    		arbolCadenas.remove(cadena.toUpperCase());
+    	}
     }
 
     /**
@@ -127,7 +175,7 @@ public class SandboxConjuntos
      */
     public void eliminarPrimera( )
     {
-
+    	arbolCadenas.pollFirst();
     }
 
     /**
@@ -148,6 +196,11 @@ public class SandboxConjuntos
      */
     public void volverMayusculas( )
     {
+    	NavigableSet<String> mayus = new TreeSet<String>();
+    	for(String i: arbolCadenas) {
+    		mayus.add(i.toUpperCase());
+    	}
+    	arbolCadenas = mayus;
     }
 
     /**
@@ -155,7 +208,8 @@ public class SandboxConjuntos
      */
     public TreeSet<String> invertirCadenas( )
     {
-        return null;
+    	NavigableSet<String> inv = arbolCadenas.descendingSet();    	
+        return (TreeSet<String>) inv;
     }
 
     /**
@@ -165,7 +219,11 @@ public class SandboxConjuntos
      */
     public boolean compararElementos( String[] otroArreglo )
     {
-        return false;
+    	NavigableSet<String> newSet = new TreeSet<String>();
+    	for (int i = 0; i < otroArreglo.length; i++) {
+    		newSet.add(otroArreglo[i]);    		
+    	}
+    	return arbolCadenas.equals(newSet);
     }
 
 }
